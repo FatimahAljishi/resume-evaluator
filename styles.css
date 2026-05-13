@@ -1,0 +1,76 @@
+:root {
+  --primary: #1a9dc5;
+  --bg-page: #f5f7fa;
+  --bg-card: #e6ace4;
+  --text-dark:#1a1a2e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 16px/1.5 "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+}
+
+header {
+    background-color: rgb(51, 87, 97);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 20px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input, textarea {
+  padding: 10px;
+  border: 1px solid #236c6c;
+  border-radius: 4px;
+  width: 100%;
+}
+
+textarea {
+  transition: border-color 0.2s ease;
+}
+
+textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+    background-color: #0c4253;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+@media (max-width: 700px) {
+  main {
+    grid-template-columns: 1fr; 
+  }
+}
+
