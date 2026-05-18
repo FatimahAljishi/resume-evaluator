@@ -1,9 +1,36 @@
+import { useState } from "react";
+
 export default function EvaluatorPage() {
+  const [jobDesc, setJobDesc] = useState("");
+  const [prompt, setPrompt] = useState("");
+  const [resume, setResume] = useState(null);
+  const [status, setStatus] = useState("idle");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (jobDesc.trim() === "") {
+      setStatus("error");
+      return;
+    }
+    if (resume === null) {
+      setStatus("error");
+      return;
+    }
+    setStatus("loading");
+  }
+
   return (
     <main>
-      <form id="my-form" action="/submit-resume" method="post">
+      <form
+        onSubmit={handleSubmit}
+        id="my-form"
+        action="/submit-resume"
+        method="post"
+      >
         <label for="job-desc">Job Description:</label>
         <textarea
+          value={jobDesc}
+          onChange={(e) => setJobDesc(e.target.value)}
           name="job-desc"
           id="job-desc"
           placeholder="Write job description here"
@@ -11,13 +38,21 @@ export default function EvaluatorPage() {
 
         <label for="prompt">Prompt:</label>
         <textarea
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
           name="prompt"
           id="prompt"
           placeholder="Enter your prompt here"
         ></textarea>
 
         <label for="resume">Upload Resume:</label>
-        <input type="file" id="resume" name="resume" accept=".pdf" />
+        <input
+          onChange={(e) => setResume(e.target.files[0] || null)}
+          type="file"
+          id="resume"
+          name="resume"
+          accept=".pdf"
+        />
         <br />
         <br />
         <button type="submit">Evaluate Resume</button>
