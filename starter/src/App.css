@@ -144,6 +144,11 @@ button:active {
   transform: translateY(1px);
 }
 
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Results Panel Styling */
 #results {
   background-color: #f8fafc;
@@ -157,6 +162,12 @@ button:active {
   justify-content: center;
   text-align: center;
   min-height: 300px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 /* Responsive Design */
