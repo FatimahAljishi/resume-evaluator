@@ -1,6 +1,9 @@
 from fastapi import FastAPI
+from app.routers.auth import router 
 
 app = FastAPI(title="Resume Evaluator API")
+
+app.include_router(router, prefix="/auth")
 
 @app.get("/")
 def root():
