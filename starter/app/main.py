@@ -1,9 +1,20 @@
 from fastapi import FastAPI
 from app.routers.auth import router 
+from app.routers.evaluate import evaluate_router
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Resume Evaluator API")
 
 app.include_router(router, prefix="/auth")
+app.include_router(evaluate_router, prefix="/evaluate")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def root():
