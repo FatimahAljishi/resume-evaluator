@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.routers.auth import router 
 from app.routers.evaluate import evaluate_router
 from fastapi.middleware.cors import CORSMiddleware
+from app.database import create_db
 
 app = FastAPI(title="Resume Evaluator API")
 
@@ -15,6 +16,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.on_event("startup")
+def on_startup():
+    create_db()
 
 @app.get("/")
 def root():
