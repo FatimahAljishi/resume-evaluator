@@ -3,6 +3,7 @@ from app.routers.auth import router
 from app.routers.evaluate import evaluate_router
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import create_db
+from app.models import User
 
 app = FastAPI(title="Resume Evaluator API")
 
