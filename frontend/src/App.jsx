@@ -5,13 +5,21 @@ import RegisterPage from "./pages/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<EvaluatorPage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <EvaluatorPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<NotFoundPage />} />

@@ -5,6 +5,6 @@ from fastapi import Depends
 
 evaluate_router = APIRouter()
 
-@evaluate_router.post("/evaluate")
+@evaluate_router.post("")
 def evaluate_resume(request: EvaluateRequest, current_user: str = Depends(get_current_user)):
     return EvaluateResponse(result = f'Evaluation requested by {current_user}. ChatGPT integration coming in Stage 5.')    

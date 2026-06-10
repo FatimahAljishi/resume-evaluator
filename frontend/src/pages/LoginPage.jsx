@@ -1,15 +1,31 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import client from "../api/client.js";
+import { useAuth } from "../context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    try {
+      const response = await client.post("/auth/login", {
+        email,
+        password,
+      });
+
+      login(email, response.data.access_token);
+
+      navigate("/");
+    } catch (err) {
+      setError("Invalid email or password");
+    }
   }
 
   return (

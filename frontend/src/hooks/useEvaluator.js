@@ -1,4 +1,5 @@
 import { useState } from "react";
+import client from "../api/client";
 
 export default function useEvaluator() {
   const [jobDesc, setJobDesc] = useState("");
@@ -8,23 +9,35 @@ export default function useEvaluator() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [result, setResult] = useState(null);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (jobDesc.trim() === "") {
       setStatus("error");
       setErrorMessage("Job description is required");
       return;
     }
+
     if (resume === null) {
       setStatus("error");
       setErrorMessage("Please upload a resume");
       return;
     }
-    setStatus("loading");
-    setTimeout(() => {
+
+    try {
+      setStatus("loading");
+      setErrorMessage("");
+
+      const response = await client.post("/evaluate", {
+        job_description: jobDesc,
+        prompt: prompt,
+      });
+
+      setResult(response.data.result);
       setStatus("success");
-      setResult("Here is the simulated response.");
-    }, 2000);
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(err.response?.data?.detail || "Evaluation failed");
+    }
   }
   return {
     jobDesc,
