@@ -1,8 +1,12 @@
-from passlib.context import CryptContext
-from jose import jwt
+from passlib.context import CryptContext #type: ignore
+from jose import jwt #type: ignore
 from datetime import datetime, timedelta
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
+from fastapi import HTTPException, status
+from sqlmodel import Session, select #type: ignore
+from app.models import User
+from app.database import get_session
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -31,3 +35,12 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 def get_current_user(token: str = Depends(oauth2_scheme)) -> str:
     email = decode_token(token)  
     return email
+
+def require_admin(
+    current_user_email: str = Depends(get_current_user),
+    session: Session = Depends(get_session),
+):
+    user = session.exec(select(User).where(User.email == current_user_email)).first()
+    if not user or user.role != "admin":
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin access required")
+    return user

@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field, EmailStr
+from sqlmodel import SQLModel #type: ignore
 
 class RegisterRequest(BaseModel):
     email: EmailStr
@@ -22,3 +23,6 @@ class EvaluateRequest(BaseModel):
 
 class EvaluateResponse(BaseModel):
     result: str
+
+class UpdateRoleRequest(SQLModel):
+    role: str
