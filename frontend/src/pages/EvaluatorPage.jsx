@@ -15,7 +15,7 @@ export default function EvaluatorPage() {
   } = useEvaluator();
 
   return (
-    <main>
+    <main className="evaluator-page">
       <form
         onSubmit={handleSubmit}
         id="my-form"

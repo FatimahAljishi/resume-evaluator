@@ -61,7 +61,7 @@ nav a:hover {
 }
 
 /* Main Layout Container */
-main {
+.evaluator-page {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;

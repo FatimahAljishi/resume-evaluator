@@ -8,6 +8,8 @@ export default function Header() {
     <header>
       <h1>Resume Evaluator</h1>
 
+      {user?.role === "admin" && <Link to="/admin">Admin</Link>}
+
       {user ? (
         <div>
           <span>{user.email}</span>
@@ -21,7 +23,6 @@ export default function Header() {
           <Link to="/register">Register</Link>
         </nav>
       )}
-      {user?.role === "admin" && <Link to="/admin">Admin</Link>}
     </header>
   );
 }
