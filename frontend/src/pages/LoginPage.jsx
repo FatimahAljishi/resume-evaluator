@@ -20,7 +20,13 @@ export default function LoginPage() {
         password,
       });
 
-      login(email, response.data.access_token);
+      const meResponse = await client.get("/auth/me", {
+        headers: {
+          Authorization: `Bearer ${response.data.access_token}`,
+        },
+      });
+
+      login(email, response.data.access_token, meResponse.data.role);
 
       navigate("/");
     } catch (err) {

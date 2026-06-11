@@ -8,12 +8,12 @@ from app.schemas import UpdateRoleRequest
 
 admin_router = APIRouter()
 
-@admin_router.get("/admin/users")
+@admin_router.get("/users")
 def list_users(session: Session = Depends(get_session), admin_user: User = Depends(require_admin)):
     users = session.exec(select(User)).all()
     return users
 
-@admin_router.patch("/admin/users/{email}/role")
+@admin_router.patch("/users/{email}/role")
 def update_user_role(email: str, request: UpdateRoleRequest, session: Session = Depends(get_session), admin_user: User = Depends(require_admin)):
     user = session.exec(select(User).where(User.email == email)).first()
     if not user:
@@ -24,7 +24,7 @@ def update_user_role(email: str, request: UpdateRoleRequest, session: Session = 
     session.refresh(user)
     return user
 
-@admin_router.delete("/admin/users/{email}")
+@admin_router.delete("/users/{email}")
 def delete_user(email: str, session: Session = Depends(get_session), admin_user: User = Depends(require_admin)):
     user = session.exec(select(User).where(User.email == email)).first()
     if not user:

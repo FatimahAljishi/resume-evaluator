@@ -21,6 +21,7 @@ export default function Header() {
           <Link to="/register">Register</Link>
         </nav>
       )}
+      {user?.role === "admin" && <Link to="/admin">Admin</Link>}
     </header>
   );
 }
