@@ -3,10 +3,20 @@ import client from "../api/client";
 
 export default function AdminPage() {
   const [users, setUsers] = useState([]);
+  const [error, setError] = useState("");
 
   async function loadUsers() {
-    const response = await client.get("/admin/users");
-    setUsers(response.data);
+    try {
+      setError("");
+
+      const response = await client.get("/admin/users");
+      setUsers(response.data);
+    } catch (err) {
+      setError(
+        err.response?.data?.detail || "403 Forbidden: Admin access required",
+      );
+      setUsers([]);
+    }
   }
 
   useEffect(() => {
@@ -31,6 +41,7 @@ export default function AdminPage() {
     <main className="admin-page">
       <div className="admin-card">
         <h2>Admin Panel</h2>
+        {error && <p className="error">{error}</p>}
 
         <table className="users-table">
           <thead>

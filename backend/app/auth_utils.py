@@ -42,5 +42,5 @@ def require_admin(
 ):
     user = session.exec(select(User).where(User.email == current_user_email)).first()
     if not user or user.role != "admin":
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin access required")
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="403 Forbidden: Admin access required")
     return user
