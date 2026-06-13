@@ -70,6 +70,7 @@ export default function LoginPage() {
           </div>
           <button type="submit">Login</button>
         </form>
+        {error && <p className="error">{error}</p>}
         <p>
           Don't have an account? <Link to="/register">Register</Link>
         </p>

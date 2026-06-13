@@ -14,6 +14,18 @@ export default function RegisterPage() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    setError("");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long");
+      return;
+    }
+
     try {
       await client.post("/auth/register", {
         email,
@@ -80,6 +92,7 @@ export default function RegisterPage() {
           </div>
           <button type="submit">Register</button>
         </form>
+        {error && <p className="error">{error}</p>}
         <p>
           Have an account? <Link to="/login">Login</Link>
         </p>

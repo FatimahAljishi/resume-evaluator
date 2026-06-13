@@ -28,35 +28,48 @@ export default function AdminPage() {
   }
 
   return (
-    <main>
-      <h1>Admin Panel</h1>
+    <main className="admin-page">
+      <div className="admin-card">
+        <h2>Admin Panel</h2>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.email}>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-
-              <td>
-                <button onClick={() => makeAdmin(user.email)}>
-                  Make Admin
-                </button>
-
-                <button onClick={() => deleteUser(user.email)}>Delete</button>
-              </td>
+        <table className="users-table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.email}>
+                <td>{user.email}</td>
+
+                <td>
+                  <span className={`role-badge ${user.role}`}>{user.role}</span>
+                </td>
+
+                <td className="actions">
+                  <button
+                    className="promote-btn"
+                    onClick={() => makeAdmin(user.email)}
+                  >
+                    Make Admin
+                  </button>
+
+                  <button
+                    className="delete-btn"
+                    onClick={() => deleteUser(user.email)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </main>
   );
 }
