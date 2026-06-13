@@ -6,7 +6,9 @@ export default function Header() {
 
   return (
     <header>
-      <h1>Resume Evaluator</h1>
+      <Link to="/" className="title-link">
+        Resume Evaluator
+      </Link>
 
       {user?.role === "admin" && <Link to="/admin">Admin</Link>}
 
@@ -19,7 +21,6 @@ export default function Header() {
       ) : (
         <nav>
           <Link to="/login">Login</Link>
-          {" | "}
           <Link to="/register">Register</Link>
         </nav>
       )}

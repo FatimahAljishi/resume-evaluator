@@ -35,40 +35,45 @@ export default function LoginPage() {
   }
 
   return (
-    <main>
-      <form
-        id="login-form"
-        action="/login"
-        method="post"
-        onSubmit={handleSubmit}
-      >
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Don't have an account? <Link to="/register">Register</Link>
-      </p>
+    <main className="login-page">
+      <div className="logo">
+        <img src="/logo.png" alt="Resume Evaluator" />
+      </div>
+      <div className="login-form-container">
+        <form
+          id="login-form"
+          action="/login"
+          method="post"
+          onSubmit={handleSubmit}
+        >
+          <div className="form-row">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="form-row">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        <p>
+          Don't have an account? <Link to="/register">Register</Link>
+        </p>
+      </div>
     </main>
   );
 }

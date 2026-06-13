@@ -34,51 +34,56 @@ export default function RegisterPage() {
   }
 
   return (
-    <main>
-      <form
-        id="register-form"
-        action="/register"
-        method="post"
-        onSubmit={handleSubmit}
-      >
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            required
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      <p>
-        Have an account? <Link to="/login">Login</Link>
-      </p>
+    <main className="register-page">
+      <div className="logo">
+        <img src="/logo.png" alt="Resume Evaluator" />
+      </div>
+      <div className="register-form-container">
+        <form
+          id="register-form"
+          action="/register"
+          method="post"
+          onSubmit={handleSubmit}
+        >
+          <div className="form-row">
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="form-row">
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="form-row">
+            <label htmlFor="confirmPassword">Confirm Password:</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+          <button type="submit">Register</button>
+        </form>
+        <p>
+          Have an account? <Link to="/login">Login</Link>
+        </p>
+      </div>
     </main>
   );
 }
