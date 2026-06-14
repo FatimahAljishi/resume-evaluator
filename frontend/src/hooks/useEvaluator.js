@@ -11,6 +11,7 @@ export default function useEvaluator() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     if (jobDesc.trim() === "") {
       setStatus("error");
       setErrorMessage("Job description is required");
@@ -26,11 +27,14 @@ export default function useEvaluator() {
     try {
       setStatus("loading");
       setErrorMessage("");
+      setResult(null);
 
-      const response = await client.post("/evaluate", {
-        job_description: jobDesc,
-        prompt: prompt,
-      });
+      const formData = new FormData();
+      formData.append("job_description", jobDesc);
+      formData.append("prompt", prompt);
+      formData.append("resume", resume);
+
+      const response = await client.post("/evaluate", formData);
 
       setResult(response.data.result);
       setStatus("success");
@@ -39,6 +43,7 @@ export default function useEvaluator() {
       setErrorMessage(err.response?.data?.detail || "Evaluation failed");
     }
   }
+
   return {
     jobDesc,
     setJobDesc,
