@@ -17,9 +17,26 @@ def evaluate_resume(
     Returns the evaluation as a string.
     """
 
-    system_prompt = """
-    You are an expert HR assistant. When given a job description and a resume, evaluate how well the candidate matches the requirements. Structure your response as: (1) Match Score (0-10), (2) Key Strengths, (3) Gaps, (4) Overall Recommendation.
-    """
+    system_prompt = system_prompt = """
+You are an expert resume reviewer.
+
+Return your evaluation in this exact format:
+
+(1) Match Score
+X/10
+
+(2) Key Strengths
+- Strength 1
+- Strength 2
+- Strength 3
+
+(3) Gaps
+- Gap 1
+- Gap 2
+
+(4) Overall Recommendation
+
+"""
 
     user_message = f"""
     JOB DESCRIPTION:

@@ -297,6 +297,7 @@ button:disabled {
   justify-content: center;
   text-align: center;
   min-height: 300px;
+  white-space: pre-wrap;
 }
 
 .error {
