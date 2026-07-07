@@ -36,3 +36,16 @@ def ping():
 @app.get("/hello/{name}")
 def hello(name: str):
     return {"message": f"Hello, {name}!"}
+
+from sqlmodel import Session
+from sqlalchemy import text
+from app.database import engine
+
+@app.get("/db-test")
+def db_test():
+    try:
+        with Session(engine) as session:
+            session.exec(text("SELECT 1"))
+        return {"status": "Database connected successfully"}
+    except Exception as e:
+        return {"error": str(e)}
