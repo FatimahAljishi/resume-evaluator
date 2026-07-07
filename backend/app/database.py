@@ -1,4 +1,5 @@
 from sqlmodel import SQLModel, create_engine, Session #type: ignore
+import os
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///resume.db")
 engine = create_engine(DATABASE_URL, echo=True)
