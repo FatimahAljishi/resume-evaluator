@@ -185,6 +185,7 @@ textarea {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background-color: #ffffff;
+  color: var(--text-main);
   transition: all 0.2s ease;
   width: 100%;
 }
