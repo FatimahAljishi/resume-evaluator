@@ -14,7 +14,8 @@ app.include_router(admin_router, prefix="/admin")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  
+    allow_origins=["http://localhost:5173",
+                  "https://resume-evaluator-by-fatimah.vercel.app"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -35,3 +36,16 @@ def ping():
 @app.get("/hello/{name}")
 def hello(name: str):
     return {"message": f"Hello, {name}!"}
+
+from sqlmodel import Session
+from sqlalchemy import text
+from app.database import engine
+
+@app.get("/db-test")
+def db_test():
+    try:
+        with Session(engine) as session:
+            session.exec(text("SELECT 1"))
+        return {"status": "Database connected successfully"}
+    except Exception as e:
+        return {"error": str(e)}

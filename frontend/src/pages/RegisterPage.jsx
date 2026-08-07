@@ -41,6 +41,8 @@ export default function RegisterPage() {
 
       navigate("/");
     } catch (err) {
+      console.log("Full error:", err);
+      console.log("Response:", err.response);
       setError(err.response?.data?.detail || "Registration failed");
     }
   }
